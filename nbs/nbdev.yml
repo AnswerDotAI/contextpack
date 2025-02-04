@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "contextpack"
+  site-url: "https://AnswerDotAI.github.io/contextpack"
+  description: "Collection of predefined contexts for helping your LLM"
+  repo-branch: main
+  repo-url: "https://github.com/AnswerDotAI/contextpack"
