@@ -1,4 +1,4 @@
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 from .core import ctx_docker , ctx_fastcore , ctx_nbclassic_server , ctx_fasthtml , ctx_claudette , ctx_fastlite_sqlutils
 
