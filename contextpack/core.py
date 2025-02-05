@@ -16,6 +16,9 @@ from fastcore.utils import *
 class Topic:
     def _children(self):
         return sorted(list(set(c for c in dir(self) if not c.startswith('_')) - {'get','getter','docs','url'}))
+    def __iter__(self): 
+        yield from (getattr(self, name) for name in self._children() 
+                    if isinstance(getattr(self, name),ST))
     def __repr__(self):
         s = ''
         if self.__doc__: s += f"doc: {self.__doc__}\n"
@@ -46,7 +49,7 @@ class CTX_Fastlite_Sqlutils(Topic):
                                     lambda url:read_url(url,sel='#sqlite-utils-python-library'))
 
 
-# %% ../nbs/00_core.ipynb 12
+# %% ../nbs/00_core.ipynb 16
 class CTX_Claudette(Topic):
     def __init__(self):
         self.async_docs    = ST('https://claudette.answer.ai/async.html.md')
@@ -55,7 +58,7 @@ class CTX_Claudette(Topic):
 
 
 
-# %% ../nbs/00_core.ipynb 13
+# %% ../nbs/00_core.ipynb 17
 class CTX_Docker(Topic):
     def __init__(self):
         self.compose_file       = ST('https://docs.docker.com/reference/compose-file/')
@@ -71,7 +74,7 @@ class CTX_Docker(Topic):
         for name,url in pageurls: setattr(self,name,ST(url))
         
 
-# %% ../nbs/00_core.ipynb 14
+# %% ../nbs/00_core.ipynb 18
 class CTX_FastHtml(Topic):
     "LLM-friendly documentation for FastHtml"
     def __init__(self):
@@ -79,19 +82,19 @@ class CTX_FastHtml(Topic):
         self.hypermedia_summary = ST('https://gist.github.com/jph00/4ad7d35ad79013aded41b5ba535a12a3',read_gist)
 
 
-# %% ../nbs/00_core.ipynb 15
+# %% ../nbs/00_core.ipynb 19
 class CTX_NBClassicServer(Topic):
     def __init__(self):
         self.nbclassic_server = ST('https://nbclassic.readthedocs.io/en/latest/nbclassic.html',
                                    lambda url:read_url(url,self='bd-article'))
 
 
-# %% ../nbs/00_core.ipynb 16
+# %% ../nbs/00_core.ipynb 20
 class CTX_Fastcore(Topic):
     def __init__(self):
         self.fc_llms_ctx   = ST('https://fastcore.fast.ai/llms-ctx.txt')
 
-# %% ../nbs/00_core.ipynb 18
+# %% ../nbs/00_core.ipynb 22
 ctx_docker = CTX_Docker()
 ctx_fastcore = CTX_Fastcore()
 ctx_nbclassic_server = CTX_NBClassicServer()

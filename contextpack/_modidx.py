@@ -24,5 +24,6 @@ d = { 'settings': { 'branch': 'main',
                                   'contextpack.core.ST.__repr__': ('core.html#st.__repr__', 'contextpack/core.py'),
                                   'contextpack.core.ST.get': ('core.html#st.get', 'contextpack/core.py'),
                                   'contextpack.core.Topic': ('core.html#topic', 'contextpack/core.py'),
+                                  'contextpack.core.Topic.__iter__': ('core.html#topic.__iter__', 'contextpack/core.py'),
                                   'contextpack.core.Topic.__repr__': ('core.html#topic.__repr__', 'contextpack/core.py'),
                                   'contextpack.core.Topic._children': ('core.html#topic._children', 'contextpack/core.py')}}}
