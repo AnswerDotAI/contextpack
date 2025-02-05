@@ -4,13 +4,15 @@
 
 # %% auto 0
 __all__ = ['ctx_docker', 'ctx_fastcore', 'ctx_nbclassic_server', 'ctx_fasthtml', 'ctx_claudette', 'ctx_fastlite_sqlutils',
-           'Topic', 'ST', 'CTX_Fastlite_Sqlutils', 'CTX_Claudette', 'CTX_Docker', 'CTX_FastHtml', 'CTX_NBClassicServer',
-           'CTX_Fastcore']
+           'Topic', 'ST', 'xget', 'CTX_Fastlite_Sqlutils', 'CTX_Claudette', 'CTX_Docker', 'CTX_FastHtml',
+           'CTX_NBClassicServer', 'CTX_Fastcore']
 
 # %% ../nbs/00_core.ipynb 3
-from typing import Callable
 from contextkit import *
 from fastcore.utils import *
+from typing import Callable
+
+import httpx
 
 # %% ../nbs/00_core.ipynb 5
 class Topic:
@@ -37,25 +39,28 @@ class ST:
 
 
 # %% ../nbs/00_core.ipynb 8
+def xget(url): return httpx.get(url).text
+
+# %% ../nbs/00_core.ipynb 9
 class CTX_Fastlite_Sqlutils(Topic):
     "LLM contexts on fastlite-sqlutils"
     def __init__(self):
-        self.fastlite_index    = ST('https://answerdotai.github.io/fastlite/index.html.md')
-        self.fastlite_core     = ST('https://answerdotai.github.io/fastlite/core.html.md')
+        self.fastlite_index    = ST('https://answerdotai.github.io/fastlite/index.html.md', xget)
+        self.fastlite_core     = ST('https://answerdotai.github.io/fastlite/core.html.md', xget)
         self.sqlite_utils_docs = ST('https://sqlite-utils.datasette.io/en/stable/python-api.html',
                                     lambda url:read_url(url,sel='#sqlite-utils-python-library'))
 
 
-# %% ../nbs/00_core.ipynb 12
+# %% ../nbs/00_core.ipynb 13
 class CTX_Claudette(Topic):
     def __init__(self):
-        self.async_docs    = ST('https://claudette.answer.ai/async.html.md')
-        self.core_docs     = ST('https://claudette.answer.ai/core.html.md')
-        self.toolloop_docs = ST('https://claudette.answer.ai/toolloop.html.md')
+        self.async_docs    = ST('https://claudette.answer.ai/async.html.md', xget)
+        self.core_docs     = ST('https://claudette.answer.ai/core.html.md', xget)
+        self.toolloop_docs = ST('https://claudette.answer.ai/toolloop.html.md', xget)
 
 
 
-# %% ../nbs/00_core.ipynb 13
+# %% ../nbs/00_core.ipynb 14
 class CTX_Docker(Topic):
     def __init__(self):
         self.compose_file       = ST('https://docs.docker.com/reference/compose-file/')
@@ -71,27 +76,27 @@ class CTX_Docker(Topic):
         for name,url in pageurls: setattr(self,name,ST(url))
         
 
-# %% ../nbs/00_core.ipynb 14
+# %% ../nbs/00_core.ipynb 15
 class CTX_FastHtml(Topic):
     "LLM-friendly documentation for FastHtml"
     def __init__(self):
-        self.fasthtml_llms_ctx = ST('https://docs.fastht.ml/llms-ctx.txt')
+        self.fasthtml_llms_ctx = ST('https://docs.fastht.ml/llms-ctx.txt', xget)
         self.hypermedia_summary = ST('https://gist.github.com/jph00/4ad7d35ad79013aded41b5ba535a12a3',read_gist)
 
 
-# %% ../nbs/00_core.ipynb 15
+# %% ../nbs/00_core.ipynb 16
 class CTX_NBClassicServer(Topic):
     def __init__(self):
         self.nbclassic_server = ST('https://nbclassic.readthedocs.io/en/latest/nbclassic.html',
                                    lambda url:read_url(url,self='bd-article'))
 
 
-# %% ../nbs/00_core.ipynb 16
+# %% ../nbs/00_core.ipynb 17
 class CTX_Fastcore(Topic):
     def __init__(self):
-        self.fc_llms_ctx   = ST('https://fastcore.fast.ai/llms-ctx.txt')
+        self.fc_llms_ctx   = ST('https://fastcore.fast.ai/llms-ctx.txt', xget)
 
-# %% ../nbs/00_core.ipynb 18
+# %% ../nbs/00_core.ipynb 19
 ctx_docker = CTX_Docker()
 ctx_fastcore = CTX_Fastcore()
 ctx_nbclassic_server = CTX_NBClassicServer()
