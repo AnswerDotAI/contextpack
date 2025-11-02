@@ -30,7 +30,7 @@ class Topic:
 
 # %% ../nbs/00_core.ipynb 6
 class ST:
-    def __init__(self,url,getter:Callable=read_url):
+    def __init__(self,url,getter:Callable=read_link):
         self.url = url
         self.getter = getter
     def get(self):
@@ -51,7 +51,7 @@ class CTX_Fastlite_Sqlutils(Topic):
         self.fastlite_index    = ST('https://answerdotai.github.io/fastlite/index.html.md', xget)
         self.fastlite_core     = ST('https://answerdotai.github.io/fastlite/core.html.md', xget)
         self.sqlite_utils_docs = ST('https://sqlite-utils.datasette.io/en/stable/python-api.html',
-                                    lambda url:read_url(url,sel='#sqlite-utils-python-library'))
+                                    lambda url:read_url(url,selector='#sqlite-utils-python-library'))
 
 
 # %% ../nbs/00_core.ipynb 17
@@ -83,7 +83,7 @@ class CTX_Docker(Topic):
 class CTX_FastHtml(Topic):
     "LLM-friendly documentation for FastHtml"
     def __init__(self):
-        self.fasthtml_llms_ctx = ST('https://docs.fastht.ml/llms-ctx.txt', xget)
+        self.fasthtml_llms_ctx = ST('https://raw.githubusercontent.com/AnswerDotAI/fasthtml/refs/heads/main/nbs/llms-ctx.txt', xget)
         self.hypermedia_summary = ST('https://gist.github.com/jph00/4ad7d35ad79013aded41b5ba535a12a3',read_gist)
 
 
