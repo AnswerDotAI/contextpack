@@ -83,7 +83,7 @@ class CTX_Docker(Topic):
 class CTX_FastHtml(Topic):
     "LLM-friendly documentation for FastHtml"
     def __init__(self):
-        self.fasthtml_llms_ctx = ST('https://docs.fastht.ml/llms-ctx.txt', xget)
+        self.fasthtml_llms_ctx = ST('https://raw.githubusercontent.com/AnswerDotAI/fasthtml/refs/heads/main/nbs/llms-ctx.txt', xget)
         self.hypermedia_summary = ST('https://gist.github.com/jph00/4ad7d35ad79013aded41b5ba535a12a3',read_gist)
 
 
