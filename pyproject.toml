@@ -3,19 +3,16 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name="contextpack"
+name = "contextpack"
 dynamic = ["version"]
 description = "Collection of predefined contexts for helping your LLM"
 readme = "README.md"
-requires-python=">=3.7"
+requires-python = ">=3.7"
 license = {text = "Apache-2.0"}
 authors = [{name = "Alexis Gallagher", email = "alexis@alexisgallagher.com"}]
 keywords = ['nbdev', 'jupyter', 'notebook', 'python']
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-]
-dependencies = ["fastcore","contextkit"]
+classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+dependencies = ['fastcore', 'contextkit']
 
 [project.urls]
 Repository = "https://github.com/AnswerDotAI/contextpack"
