@@ -28,4 +28,5 @@ version = {attr = "contextpack.__version__"}
 include = ["contextpack"]
 
 [tool.nbdev]
+allowed_metadata_keys = ['solveit_dialog_mode', 'solveit_ver']
 custom_sidebar = false
